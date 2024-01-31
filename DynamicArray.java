@@ -93,6 +93,6 @@ public class DynamicArray {
     }
 
     public void remove(Person object){
-
+        remove(indexOf(object));
     }
 }

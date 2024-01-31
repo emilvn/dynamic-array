@@ -9,7 +9,5 @@ public class Main {
 
         DynamicArray dynamicArray = new DynamicArray(people);
 
-        dynamicArray.printArray();
-        dynamicArray.printArray();
     }
 }
