@@ -9,10 +9,8 @@ public class Main {
 
         DynamicArray dynamicArray = new DynamicArray(people);
 
-        Person person6 = new Person("Rasmus");
-        dynamicArray.add(person6);
         dynamicArray.printArray();
-        dynamicArray.remove(3);
+        dynamicArray.insert(0, person1);
         dynamicArray.printArray();
     }
 }

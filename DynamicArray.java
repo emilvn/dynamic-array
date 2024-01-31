@@ -7,7 +7,7 @@ public class DynamicArray {
 
     public void printArray(){
         for(Person object : arr){
-            System.out.println(object.getName());
+            System.out.println(object);
         }
         System.out.println("---------------------------");
     }
@@ -55,12 +55,32 @@ public class DynamicArray {
         arr = new Person[0];
     }
 
-    public void addAll(Person[] objects){
-
+    public void addAll(Person... objects){
+        int newSize = size() + objects.length;
+        Person[] newArr = new Person[newSize];
+        for(int i = 0; i<size(); i++){
+            newArr[i] = arr[i];
+        }
+        for(int i = size(), j=0; i<newSize; i++, j++){
+            newArr[i] = objects[j];
+        }
+        arr = newArr;
     }
 
     public void insert(int index, Person object){
-
+        Person[] newArr = new Person[size()+1];
+        if(index == size()){
+            add(object);
+            return;
+        }
+        for(int i = 0, j = 0; i<size(); i++, j++){
+            if(i == index){
+                newArr[i] = object;
+                j++;
+            }
+            newArr[j] = arr[i];
+        }
+        arr = newArr;
     }
 
     public int indexOf(Person object){
