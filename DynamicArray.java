@@ -84,7 +84,12 @@ public class DynamicArray {
     }
 
     public int indexOf(Person object){
-        return 0;
+        for(int i = 0; i<size(); i++){
+            if(arr[i].equals(object)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void remove(Person object){

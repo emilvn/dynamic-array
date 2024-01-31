@@ -10,7 +10,6 @@ public class Main {
         DynamicArray dynamicArray = new DynamicArray(people);
 
         dynamicArray.printArray();
-        dynamicArray.insert(0, person1);
         dynamicArray.printArray();
     }
 }
