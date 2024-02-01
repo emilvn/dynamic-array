@@ -1,15 +1,8 @@
 public class DynamicArray {
     private Person[] arr;
-    int size;
-    final int growSize = 5;
 
-    public DynamicArray(){
-        this.arr = new Person[0];
-    }
-
-    public DynamicArray(Person[] people){
-        this.size = people.length;
-        this.arr = people;
+    public DynamicArray(Person[] arr){
+        this.arr = arr;
     }
 
     public void printArray(){
@@ -20,11 +13,12 @@ public class DynamicArray {
     }
 
     public void add(Person object){
-        size++;
-        if(size > arr.length){
-            grow();
+        Person[] newArr = new Person[size()+1];
+        for(int i = 0; i<size(); i++){
+            newArr[i] = arr[i];
         }
-        arr[size-1] = object;
+        newArr[size()] = object;
+        arr = newArr;
     }
 
     public Person get(int index){
@@ -32,26 +26,26 @@ public class DynamicArray {
     }
 
     public int size(){
-        return size;
+        return arr.length;
     }
 
     public void remove(){
-        size--;
-        arr[size] = null;
+        Person[] newArr = new Person[size()-1];
+        for(int i = 0; i<size()-1; i++){
+            newArr[i] = arr[i];
+        }
+        arr = newArr;
     }
     public void remove(int index){
-        if(index == -1){
-            return;
-        }
-        for(int i = 0, j = 0; i<size; i++){
+        Person[] newArr = new Person[size()-1];
+        for(int i = 0, j = 0; i<size(); i++){
             if(i == index){
                 continue;
             }
-            arr[j] = arr[i];
+            newArr[j] = arr[i];
             j++;
         }
-        size--;
-        arr[size] = null;
+        arr = newArr;
     }
     public void set(int index, Person object){
         arr[index] = object;
@@ -62,24 +56,23 @@ public class DynamicArray {
     }
 
     public void addAll(Person... objects){
-        size += objects.length;
-        while(size > arr.length){
-            grow();
+        int newSize = size() + objects.length;
+        Person[] newArr = new Person[newSize];
+        for(int i = 0; i<size(); i++){
+            newArr[i] = arr[i];
         }
-        for(int i = size-objects.length, j=0; i<size; i++, j++){
-            arr[i] = objects[j];
+        for(int i = size(), j=0; i<newSize; i++, j++){
+            newArr[i] = objects[j];
         }
+        arr = newArr;
     }
 
     public void insert(int index, Person object){
-        size++;
-        if(size < index + 1){
-            size = index+1;
+        Person[] newArr = new Person[size()+1];
+        if(index == size()){
+            add(object);
+            return;
         }
-        while(size > arr.length){
-            grow();
-        }
-        Person[] newArr = new Person[arr.length];
         for(int i = 0, j = 0; i<size(); i++, j++){
             if(i == index){
                 newArr[i] = object;
@@ -91,7 +84,7 @@ public class DynamicArray {
     }
 
     public int indexOf(Person object){
-        for(int i = 0; i<size; i++){
+        for(int i = 0; i<size(); i++){
             if(arr[i].equals(object)){
                 return i;
             }
@@ -101,11 +94,5 @@ public class DynamicArray {
 
     public void remove(Person object){
         remove(indexOf(object));
-    }
-
-    private void grow(){
-        Person[] newArr = new Person[size+growSize];
-        System.arraycopy(arr, 0, newArr, 0, arr.length);
-        arr = newArr;
     }
 }
