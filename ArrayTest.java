@@ -5,7 +5,7 @@ public class ArrayTest {
     private Person simon;
     private Person axel;
     private Person jonas;
-    private DynamicArray dynamicArray;
+    private DynamicArray<Person> dynamicArray;
     public ArrayTest(){
         emil = new Person("Emil");
         victor = new Person("Victor");
@@ -13,7 +13,7 @@ public class ArrayTest {
         axel = new Person("Axel");
         jonas = new Person("Jonas");
         people = new Person[]{emil, victor, simon, axel, jonas};
-        dynamicArray = new DynamicArray(people);
+        dynamicArray = new DynamicArray<>(people);
     }
 
     public void testRemoveObject() {
